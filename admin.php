@@ -58,9 +58,7 @@ function ykf_brx_fontawesome_pro_admin_enqueue_scripts($hook)
         'ykf-brx-fontawesome-pro-admin',
         'ykf_brx_fontawesome_pro_admin',
         [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('ykf-brx-fontawesome-pro'),
-            'iframe_src' => file_get_contents(__DIR__ . '/upload.html'),'_wpnonce' => wp_create_nonce(SIUL::WP_OPTION),
+            'iframe_src' => file_get_contents(__DIR__ . '/upload.html'),
             'rest_api' => [
                 'nonce' => wp_create_nonce('wp_rest'),
                 'root' => esc_url_raw(rest_url()),
