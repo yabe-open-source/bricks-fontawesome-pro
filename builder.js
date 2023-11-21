@@ -48,6 +48,10 @@ document.getElementById('bricks-builder-iframe').addEventListener('load', functi
 
         var e = this;
 
+        e.icons.fontawesomeBrands = {};
+        e.icons.fontawesomeRegular = {};
+        e.icons.fontawesomeSolid = {};
+
         // brands
         ykf_brx_fontawesome_pro.icons.brands.forEach((function(t) {
             t = "fa-brands fa-".concat(t);
