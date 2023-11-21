@@ -40,19 +40,19 @@ function ykf_brx_fontawesome_pro_rest_api_upload(WP_REST_Request $request)
 
     $file = $request->get_file_params();
     if (empty($file)) {
-        $response['message'] = esc_html__('No file uploaded.', 'ykf-brx-fontawesome-pro');
+        $response['message'] = 'No file uploaded.';
         return new WP_REST_Response($response, 400);
     }
 
     $file = $file['file'];
     if (!is_array($file)) {
-        $response['message'] = esc_html__('Invalid file.', 'ykf-brx-fontawesome-pro');
+        $response['message'] = 'Invalid file.';
         return new WP_REST_Response($response, 400);
     }
 
 
     if ($file['type'] !== 'application/zip') {
-        $response['message'] = esc_html__('Invalid file type.', 'ykf-brx-fontawesome-pro');
+        $response['message'] = 'Invalid file type.';
         return new WP_REST_Response($response, 400);
     }
 
@@ -63,6 +63,6 @@ function ykf_brx_fontawesome_pro_rest_api_upload(WP_REST_Request $request)
     $zip->close();
 
     $response['success'] = true;
-    $response['message'] = esc_html__('Upload success.', 'ykf-brx-fontawesome-pro');
+    $response['message'] = 'Upload success.';
     return new WP_REST_Response($response);
 }

@@ -18,11 +18,7 @@ add_filter('plugin_action_links_' . plugin_basename(YKF_BRX_FONTAWESOME_PRO_FILE
 function ykf_brx_fontawesome_pro_plugin_action_links($links)
 {
     // add upload link that has id `ykf-brx-fontawesome-pro-upload` that will be used to trigger js script
-    $links['ykf-brx-fontawesome-pro-upload'] = sprintf(
-        '<a id="ykf-brx-fontawesome-pro-admin-upload-link" style="cursor:pointer;">%s</a>',
-        esc_html__('Upload', 'ykf-brx-fontawesome-pro')
-    );
-
+    $links['ykf-brx-fontawesome-pro-upload'] = '<a id="ykf-brx-fontawesome-pro-admin-upload-link" style="cursor:pointer;">Upload</a>';
     return $links;
 }
 
