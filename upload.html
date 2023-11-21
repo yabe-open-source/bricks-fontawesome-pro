@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="preload" as="style" href="https://esm.sh/@master/normal.css@beta?css">
+    <link rel="stylesheet" href="https://esm.sh/@master/normal.css@beta?css">
+    <link rel="modulepreload" href="https://esm.sh/@master/css@beta">
+    <link href="https://esm.sh/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://esm.sh/awesome-notifications/dist/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="wrap">
+            <h1 class="font:28 fg:gray-30 font:semibold">Font Awesome Pro</h1>
+            <div class="mt:15">
+                <table>
+                    <tr class="my:10">
+                        <th class="text-align:left pr:10 lh:1.3 font:semibold">1.</th>
+                        <td class="flex align-items:center">
+                            Download the latest version of Font Awesome Pro:
+                            <a :href="fontawesomeDownloadUrl" target="_blank" class="fg:#2271b1 b:1|solid|#2271b1 bg:#f6f7f7 vertical:top cursor:pointer r:3 p:0|10 my:0 mx:10 min-h:30 inline-block font:13 text:none lh:2.15384615 {bg:#f0f0f1;fg:#0a4b78;border:#0a4b78}:hover">Download</a>
+                        </td>
+                    </tr>
+                    <tr class="my:10">
+                        <th class="text-align:left pr:10 lh:1.3 font:semibold">2.</th>
+                        <td class="flex align-items:center">
+                            Then upload the zip file here:
+                            <input type="file" id="zipFileInput" ref="zipFileInput" @change="handleFileChange" accept=".zip" class="mx:10" />
+                        </td>
+                    </tr>
+                    <tr v-if="uploadSuccess" class="my:10">
+                        <th class="text-align:left pr:10 lh:1.3 font:semibold">3.</th>
+                        <td class="flex align-items:center">
+                            You are done!
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { createApp, ref, computed } from 'https://esm.sh/vue@3/dist/vue.esm-browser.prod.js';
+        import JSZip from 'https://esm.sh/jszip@3.10.1';
+        import axios from 'https://esm.sh/axios';
+        import { initRuntime as initMasterCSS } from 'https://esm.sh/@master/css@beta';
+        import AWN from 'https://esm.sh/awesome-notifications';
+
+        initMasterCSS({});
+
+        let notifier = new AWN({});
+
+        createApp({
+            setup() {
+                const latestVersion = ref(null);
+
+                axios.get('https://data.jsdelivr.com/v1/package/npm/@fortawesome/fontawesome-free')
+                    .then(function (response) {
+                        latestVersion.value = response.data.tags.latest;
+                    })
+                    .catch(function (error) {
+                        notifier.alert('Error fetching latest version');
+                    });
+
+                const fontawesomeDownloadUrl = computed(() => {
+                    return `https://fontawesome.com/releases/${latestVersion.value}/web/download`;
+                });
+
+                const uploadSuccess = ref(false);
+                const zipFileInput = ref(null);
+                const files = ref(null);
+
+                function handleFileChange() {
+                    files.value = zipFileInput.value?.files;
+                    let promise = uploadZipFile();
+                    notifier.async(promise);
+                }
+
+                async function uploadZipFile() {
+                    const file = files.value[0];
+                    if (file) {
+                        const jszip = new JSZip();
+                        try {
+                            const zip = await jszip.loadAsync(file);
+                            let rootDirectory = null;
+                            let categorizedByStyle = {};
+
+                            // Identify the root directory
+                            zip.forEach((relativePath, zipEntry) => {
+                                if (zipEntry.dir && rootDirectory === null) {
+                                    rootDirectory = relativePath.split('/')[0] + '/';
+                                }
+                            });
+
+                            // Process icons.json file
+                            if (rootDirectory) {
+                                const iconsFilePath = rootDirectory + "metadata/icons.json";
+                                const iconsFile = zip.file(iconsFilePath);
+                                if (iconsFile) {
+                                    const iconsContent = await iconsFile.async("string");
+                                    const iconsData = JSON.parse(iconsContent);
+
+                                    Object.entries(iconsData).forEach(([key, value]) => {
+                                        if (value.styles) {
+                                            value.styles.forEach(style => {
+                                                if (!categorizedByStyle[style]) {
+                                                    categorizedByStyle[style] = [];
+                                                }
+                                                categorizedByStyle[style].push(key);
+                                            });
+                                        }
+                                    });
+                                } else {
+                                    throw new Error(iconsFilePath + " not found in ZIP file");
+                                }
+                            } else {
+                                throw new Error('No directories found in ZIP file');
+                            }
+
+                            // Create a new ZIP file with css/ and webfonts/ directories moved to root
+                            const newZip = new JSZip();
+                            zip.forEach((relativePath, file) => {
+                                if (relativePath.startsWith(rootDirectory + "css/") || relativePath.startsWith(rootDirectory + "webfonts/")) {
+                                    // Remove the root directory part from the path
+                                    const newPath = relativePath.replace(rootDirectory, '');
+                                    newZip.file(newPath, file._data, { binary: true });
+                                }
+                            });
+
+                            // Add the minified icons.json to the root of the new ZIP
+                            const minifiedIconsJson = JSON.stringify(categorizedByStyle);
+                            newZip.file("icons.json", minifiedIconsJson, { binary: true });
+
+                            // Generate the new ZIP file
+                            await newZip.generateAsync({ type: "blob" }).then(async function (content) {
+                                // send the zip file to the server
+                                const formData = new FormData();
+                                formData.append('file', content);
+
+                                await axios.post(`${window.parent.ykf_brx_fontawesome_pro_admin.rest_api.url}/upload`, formData, {
+                                    headers: {
+                                        'Content-Type': 'multipart/form-data',
+                                        'accept': 'application/json',
+                                        'X-WP-Nonce': window.parent.ykf_brx_fontawesome_pro_admin.rest_api.nonce,
+                                    }
+                                }).then(function (response) {
+                                    if (!response.data.success) {
+                                        throw new Error(response.data.message);
+                                    }
+                                    uploadSuccess.value = true;
+                                }).catch(function (error) {
+                                    throw new Error(error.response.data.message);
+                                })
+                            });
+                        } catch (err) {
+                            throw new Error('Error processing ZIP file');
+                        }
+                    }
+                }
+
+                return {
+                    fontawesomeDownloadUrl,
+                    zipFileInput,
+                    uploadSuccess,
+                    handleFileChange,
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
