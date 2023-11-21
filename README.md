@@ -37,14 +37,11 @@ The Font Awesome 6 Pro integration for Bricks Builder.
 1. Download the plugin zip file
 2. Install the plugin by uploading the zip file
 3. Activate the plugin
-
-## Usage
-
-1. Navigate to `Plugins > Installed Plugins` page, and click the `Upload` action link.
+4. Navigate to `Plugins > Installed Plugins` page, and click the `Upload` action link.
 
 ![Upload modal](./screenshot-1.png)
 
-2. Follow the on-screen instructions.
+5. Follow the on-screen instructions.
 
 ![On-screen instructions](./screenshot-2.png)
 
