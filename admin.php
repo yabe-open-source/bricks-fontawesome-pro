@@ -49,7 +49,7 @@ function yos_brx_fontawesome_pro_admin_enqueue_scripts($hook)
     wp_enqueue_script(
         'yos-brx-fontawesome-pro-admin',
         plugins_url('admin.js', __FILE__),
-        ['jquery'],
+        [],
         (string) filemtime(__DIR__ . '/admin.js'),
         true
     );
