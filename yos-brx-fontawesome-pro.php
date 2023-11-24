@@ -2,8 +2,8 @@
 
 /**
  * @wordpress-plugin
- * Plugin Name:         Yabe Ko-fi - Bricks Font Awesome Pro
- * Plugin URI:          https://ko-fi.yabe.land
+ * Plugin Name:         Yabe Open Source - Bricks Font Awesome Pro
+ * Plugin URI:          https://os.yabe.land
  * Description:         Bricks builder: Font Awesome 6 Pro integration
  * Version:             1.0.0-DEV
  * Requires at least:   6.0
@@ -11,15 +11,15 @@
  * Author:              Rosua
  * Author URI:          https://rosua.org
  * Donate link:         https://ko-fi.com/Q5Q75XSF7
- * Text Domain:         yabe-ko-fi-brx-fontawesome-pro
+ * Text Domain:         yabe-open-source-brx-fontawesome-pro
  * Domain Path:         /languages
  *
- * @package             Yabe Ko-fi
+ * @package             Yabe Open Source
  * @author              Joshua Gugun Siagian <suabahasa@gmail.com>
  */
 
 /*
- * This file is part of the Yabe Ko-fi package.
+ * This file is part of the Yabe Open Source package.
  *
  * (c) Joshua <suabahasa@gmail.com>
  *
@@ -31,11 +31,11 @@ declare(strict_types=1);
 
 defined('ABSPATH') || exit;
 
-define('YKF_BRX_FONTAWESOME_PRO_FILE', __FILE__);
+define('YOS_BRX_FONTAWESOME_PRO_FILE', __FILE__);
 
 if (!class_exists('\ZipArchive')) {
     add_action('admin_notices', function () {
-        echo '<div class="notice notice-error"><p><b>Yabe Ko-fi - Bricks Font Awesome Pro</b>: The <code>ZipArchive</code> class is not available. Please contact your hosting provider to install and enable the <code>zip</code> PHP extension.</p></div>';
+        echo '<div class="notice notice-error"><p><b>Yabe Open Source - Bricks Font Awesome Pro</b>: The <code>ZipArchive</code> class is not available. Please contact your hosting provider to install and enable the <code>zip</code> PHP extension.</p></div>';
     });
     return;
 }

@@ -1,9 +1,9 @@
-# Yabe Ko-fi - Bricks Font Awesome Pro
+# Yabe Open Source - Bricks Font Awesome Pro
 
 <p align="center">
-    <a aria-label="GitHub release (latest by date including pre-releases)" href="https://github.com/yabe-ko-fi/bricks-fontawesome-pro/releases">
+    <a aria-label="GitHub release (latest by date including pre-releases)" href="https://github.com/yabe-open-source/bricks-fontawesome-pro/releases">
         <picture>
-            <img alt="GitHub release" src="https://img.shields.io/github/v/release/yabe-ko-fi/bricks-fontawesome-pro?include_prereleases&logo=github">
+            <img alt="GitHub release" src="https://img.shields.io/github/v/release/yabe-open-source/bricks-fontawesome-pro?include_prereleases&logo=github">
         </picture>
     </a>
     <a aria-label="GitHub Sponsors" href="https://github.com/sponsors/suabahasa">

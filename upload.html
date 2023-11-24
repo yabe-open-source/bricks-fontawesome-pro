@@ -138,11 +138,11 @@
                                 const formData = new FormData();
                                 formData.append('file', content);
 
-                                await axios.post(`${window.parent.ykf_brx_fontawesome_pro_admin.rest_api.url}/upload`, formData, {
+                                await axios.post(`${window.parent.yos_brx_fontawesome_pro_admin.rest_api.url}/upload`, formData, {
                                     headers: {
                                         'Content-Type': 'multipart/form-data',
                                         'accept': 'application/json',
-                                        'X-WP-Nonce': window.parent.ykf_brx_fontawesome_pro_admin.rest_api.nonce,
+                                        'X-WP-Nonce': window.parent.yos_brx_fontawesome_pro_admin.rest_api.nonce,
                                     }
                                 }).then(function (response) {
                                     if (!response.data.success) {

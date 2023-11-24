@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Yabe Ko-fi package.
+ * This file is part of the Yabe Open Source package.
  *
  * (c) Joshua <suabahasa@gmail.com>
  *
@@ -14,17 +14,17 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 // add row action on the plugin list page
-add_filter('plugin_action_links_' . plugin_basename(YKF_BRX_FONTAWESOME_PRO_FILE), 'ykf_brx_fontawesome_pro_plugin_action_links');
-function ykf_brx_fontawesome_pro_plugin_action_links($links)
+add_filter('plugin_action_links_' . plugin_basename(YOS_BRX_FONTAWESOME_PRO_FILE), 'yos_brx_fontawesome_pro_plugin_action_links');
+function yos_brx_fontawesome_pro_plugin_action_links($links)
 {
-    // add upload link that has id `ykf-brx-fontawesome-pro-upload` that will be used to trigger js script
-    $links['ykf-brx-fontawesome-pro-upload'] = '<a id="ykf-brx-fontawesome-pro-admin-upload-link" style="cursor:pointer;">Upload</a>';
+    // add upload link that has id `yos-brx-fontawesome-pro-upload` that will be used to trigger js script
+    $links['yos-brx-fontawesome-pro-upload'] = '<a id="yos-brx-fontawesome-pro-admin-upload-link" style="cursor:pointer;">Upload</a>';
     return $links;
 }
 
 // include admin.js file on the `Plugins` page
-add_action('admin_enqueue_scripts', 'ykf_brx_fontawesome_pro_admin_enqueue_scripts');
-function ykf_brx_fontawesome_pro_admin_enqueue_scripts($hook)
+add_action('admin_enqueue_scripts', 'yos_brx_fontawesome_pro_admin_enqueue_scripts');
+function yos_brx_fontawesome_pro_admin_enqueue_scripts($hook)
 {
     if ($hook !== 'plugins.php') {
         return;
@@ -32,7 +32,7 @@ function ykf_brx_fontawesome_pro_admin_enqueue_scripts($hook)
 
     // defer and type=module
     add_filter('script_loader_tag', function ($tag, $handle) {
-        if ('ykf-brx-fontawesome-pro-admin' !== $handle) {
+        if ('yos-brx-fontawesome-pro-admin' !== $handle) {
             return $tag;
         }
 
@@ -40,14 +40,14 @@ function ykf_brx_fontawesome_pro_admin_enqueue_scripts($hook)
     }, 1_000_001, 2);
 
     wp_enqueue_style(
-        'ykf-brx-fontawesome-pro-admin',
+        'yos-brx-fontawesome-pro-admin',
         plugins_url('admin.css', __FILE__),
         [],
         (string) filemtime(__DIR__ . '/admin.css')
     );
 
     wp_enqueue_script(
-        'ykf-brx-fontawesome-pro-admin',
+        'yos-brx-fontawesome-pro-admin',
         plugins_url('admin.js', __FILE__),
         ['jquery'],
         (string) filemtime(__DIR__ . '/admin.js'),
@@ -55,15 +55,15 @@ function ykf_brx_fontawesome_pro_admin_enqueue_scripts($hook)
     );
 
     wp_localize_script(
-        'ykf-brx-fontawesome-pro-admin',
-        'ykf_brx_fontawesome_pro_admin',
+        'yos-brx-fontawesome-pro-admin',
+        'yos_brx_fontawesome_pro_admin',
         [
             'iframe_src' => file_get_contents(__DIR__ . '/upload.html'),
             'rest_api' => [
                 'nonce' => wp_create_nonce('wp_rest'),
                 'root' => esc_url_raw(rest_url()),
-                'namespace' => 'ykf-brx-fontawesome-pro/v1',
-                'url' => esc_url_raw(rest_url('ykf-brx-fontawesome-pro/v1')),
+                'namespace' => 'yos-brx-fontawesome-pro/v1',
+                'url' => esc_url_raw(rest_url('yos-brx-fontawesome-pro/v1')),
             ],
         ]
     );

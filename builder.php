@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Yabe Ko-fi package.
+ * This file is part of the Yabe Open Source package.
  *
  * (c) Joshua <suabahasa@gmail.com>
  *
@@ -17,15 +17,15 @@ use Bricks\Database;
 use Bricks\Helpers;
 use Bricks\Theme_Styles;
 
-add_action('wp_enqueue_scripts', 'ykf_brx_fontawesome_pro', 1_000_001);
+add_action('wp_enqueue_scripts', 'yos_brx_fontawesome_pro', 1_000_001);
 
-function ykf_brx_fontawesome_pro()
+function yos_brx_fontawesome_pro()
 {
     if (!defined('BRICKS_VERSION')) {
         return;
     }
 
-    if (!is_dir(wp_upload_dir()['basedir'] . '/ykf-brx-fontawesome-pro')) {
+    if (!is_dir(wp_upload_dir()['basedir'] . '/yos-brx-fontawesome-pro')) {
         return;
     }
 
@@ -69,8 +69,8 @@ function ykf_brx_fontawesome_pro()
         }
     }
 
-    $cache_base_dir = wp_upload_dir()['basedir'] . '/ykf-brx-fontawesome-pro/';
-    $cache_base_url = wp_upload_dir()['baseurl'] . '/ykf-brx-fontawesome-pro/';
+    $cache_base_dir = wp_upload_dir()['basedir'] . '/yos-brx-fontawesome-pro/';
+    $cache_base_url = wp_upload_dir()['baseurl'] . '/yos-brx-fontawesome-pro/';
 
     // core styling file
     if (
@@ -95,7 +95,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeSharpLight')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro',
+            'yos-brx-fontawesome-6-pro',
             $cache_base_url . 'css/fontawesome.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/fontawesome.min.css')
@@ -109,7 +109,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeBrands')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro-brands',
+            'yos-brx-fontawesome-6-pro-brands',
             $cache_base_url . 'css/brands.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/brands.min.css')
@@ -123,7 +123,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeRegular')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro-regular',
+            'yos-brx-fontawesome-6-pro-regular',
             $cache_base_url . 'css/regular.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/regular.min.css')
@@ -137,7 +137,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeSolid')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro-solid',
+            'yos-brx-fontawesome-6-pro-solid',
             $cache_base_url . 'css/solid.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/solid.min.css')
@@ -151,7 +151,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeLight')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro-light',
+            'yos-brx-fontawesome-6-pro-light',
             $cache_base_url . 'css/light.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/light.min.css')
@@ -165,7 +165,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeThin')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro-thin',
+            'yos-brx-fontawesome-6-pro-thin',
             $cache_base_url . 'css/thin.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/thin.min.css')
@@ -179,7 +179,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeDuotone')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro-duotone',
+            'yos-brx-fontawesome-6-pro-duotone',
             $cache_base_url . 'css/duotone.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/duotone.min.css')
@@ -193,7 +193,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeSharpSolid')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro-sharp-solid',
+            'yos-brx-fontawesome-6-pro-sharp-solid',
             $cache_base_url . 'css/sharp-solid.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/sharp-solid.min.css')
@@ -207,7 +207,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeSharpRegular')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro-sharp-regular',
+            'yos-brx-fontawesome-6-pro-sharp-regular',
             $cache_base_url . 'css/sharp-regular.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/sharp-regular.min.css')
@@ -221,7 +221,7 @@ function ykf_brx_fontawesome_pro()
         strpos($theme_style_settings_string, '"library":"fontawesomeSharpLight')
     ) {
         wp_enqueue_style(
-            'ykf-brx-fontawesome-6-pro-sharp-light',
+            'yos-brx-fontawesome-6-pro-sharp-light',
             $cache_base_url . 'css/sharp-light.min.css',
             ['bricks-frontend'],
             (string) filemtime($cache_base_dir . 'css/sharp-light.min.css')
@@ -237,7 +237,7 @@ function ykf_brx_fontawesome_pro()
     $icons = json_decode(file_get_contents($cache_base_dir . 'icons.json'), true);
 
     wp_enqueue_script(
-        'ykf-brx-fontawesome-pro-builder',
+        'yos-brx-fontawesome-pro-builder',
         plugins_url('builder.js', __FILE__),
         ['wp-hooks', 'bricks-builder',],
         (string) filemtime(__DIR__ . '/builder.js'),
@@ -245,8 +245,8 @@ function ykf_brx_fontawesome_pro()
     );
 
     wp_localize_script(
-        'ykf-brx-fontawesome-pro-builder',
-        'ykf_brx_fontawesome_pro',
+        'yos-brx-fontawesome-pro-builder',
+        'yos_brx_fontawesome_pro',
         [
             'icons' => $icons,
         ]

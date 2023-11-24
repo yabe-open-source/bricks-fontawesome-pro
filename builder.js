@@ -53,13 +53,13 @@ document.getElementById('bricks-builder-iframe').addEventListener('load', functi
         e.icons.fontawesomeSolid = {};
 
         // brands
-        ykf_brx_fontawesome_pro.icons.brands.forEach((function(t) {
+        yos_brx_fontawesome_pro.icons.brands.forEach((function(t) {
             t = "fa-brands fa-".concat(t);
             e.icons.fontawesomeBrands[t] = '<i class="'.concat(t, '"></i>');
         }));
 
         // regular and sharp regular
-        ykf_brx_fontawesome_pro.icons.regular.forEach((function(t) {
+        yos_brx_fontawesome_pro.icons.regular.forEach((function(t) {
             t = "fa-regular fa-".concat(t);
             e.icons.fontawesomeRegular[t] = '<i class="'.concat(t, '"></i>');
 
@@ -68,7 +68,7 @@ document.getElementById('bricks-builder-iframe').addEventListener('load', functi
         }));
 
         // solid and sharp solid
-        ykf_brx_fontawesome_pro.icons.solid.forEach((function(t) {
+        yos_brx_fontawesome_pro.icons.solid.forEach((function(t) {
             t = "fa-solid fa-".concat(t);
             e.icons.fontawesomeSolid[t] = '<i class="'.concat(t, '"></i>');
             
@@ -77,7 +77,7 @@ document.getElementById('bricks-builder-iframe').addEventListener('load', functi
         }));
 
         // light and sharp light
-        ykf_brx_fontawesome_pro.icons.light.forEach((function(t) {
+        yos_brx_fontawesome_pro.icons.light.forEach((function(t) {
             t = "fa-light fa-".concat(t);
             e.icons.fontawesomeLight[t] = '<i class="'.concat(t, '"></i>');
 
@@ -86,13 +86,13 @@ document.getElementById('bricks-builder-iframe').addEventListener('load', functi
         }));
 
         // thin
-        ykf_brx_fontawesome_pro.icons.thin.forEach((function(t) {
+        yos_brx_fontawesome_pro.icons.thin.forEach((function(t) {
             t = "fa-thin fa-".concat(t);
             e.icons.fontawesomeThin[t] = '<i class="'.concat(t, '"></i>');
         }));
 
         // duotone
-        ykf_brx_fontawesome_pro.icons.duotone.forEach((function(t) {
+        yos_brx_fontawesome_pro.icons.duotone.forEach((function(t) {
             t = "fa-duotone fa-".concat(t);
             e.icons.fontawesomeDuotone[t] = '<i class="'.concat(t, '"></i>');
         }));

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Yabe Ko-fi package.
+ * This file is part of the Yabe Open Source package.
  *
  * (c) Joshua <suabahasa@gmail.com>
  *
@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 defined('ABSPATH') || exit;
 
-// add wp-json/ykf-brx-fontawesome-pro/v1/upload endpoint
-add_action('rest_api_init', 'ykf_brx_fontawesome_pro_rest_api_init');
-function ykf_brx_fontawesome_pro_rest_api_init()
+// add wp-json/yos-brx-fontawesome-pro/v1/upload endpoint
+add_action('rest_api_init', 'yos_brx_fontawesome_pro_rest_api_init');
+function yos_brx_fontawesome_pro_rest_api_init()
 {
     register_rest_route(
-        'ykf-brx-fontawesome-pro/v1',
+        'yos-brx-fontawesome-pro/v1',
         '/upload',
         [
             'methods' => 'POST',
-            'callback' => 'ykf_brx_fontawesome_pro_rest_api_upload',
+            'callback' => 'yos_brx_fontawesome_pro_rest_api_upload',
             'permission_callback' => function ($wprestRequest) {
                 return wp_verify_nonce($wprestRequest->get_header('X-WP-Nonce'), 'wp_rest') && current_user_can('manage_options');
             },
@@ -31,7 +31,7 @@ function ykf_brx_fontawesome_pro_rest_api_init()
 }
 
 // handle upload
-function ykf_brx_fontawesome_pro_rest_api_upload(WP_REST_Request $request)
+function yos_brx_fontawesome_pro_rest_api_upload(WP_REST_Request $request)
 {
     $response = [
         'success' => false,
@@ -58,7 +58,7 @@ function ykf_brx_fontawesome_pro_rest_api_upload(WP_REST_Request $request)
 
     $zip = new ZipArchive();
     $zip->open($file['tmp_name']);
-    $zip->extractTo(WP_CONTENT_DIR . '/uploads/ykf-brx-fontawesome-pro');
+    $zip->extractTo(WP_CONTENT_DIR . '/uploads/yos-brx-fontawesome-pro');
 
     $zip->close();
 

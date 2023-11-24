@@ -1,15 +1,15 @@
-document.getElementById('ykf-brx-fontawesome-pro-admin-upload-link').addEventListener('click', init);
+document.getElementById('yos-brx-fontawesome-pro-admin-upload-link').addEventListener('click', init);
 
 function init() {
-    let iframe_src = window.ykf_brx_fontawesome_pro_admin.iframe_src.replace(/"/g, '&quot;');
+    let iframe_src = window.yos_brx_fontawesome_pro_admin.iframe_src.replace(/"/g, '&quot;');
 
     const modal = document.createElement('div');
-    modal.id = 'ykfbxfapro';
-    modal.className = 'ykfbxfapro';
+    modal.id = 'yosbrxfapro';
+    modal.className = 'yosbrxfapro';
 
     modal.innerHTML = `
-        <div class="ykfbxfapro-content">
-            <span class="ykfbxfapro-close-btn">&times;</span>
+        <div class="yosbrxfapro-content">
+            <span class="yosbrxfapro-close-btn">&times;</span>
             <iframe srcdoc="${iframe_src}" frameborder="0"></iframe>
         </div>
     `;
@@ -17,7 +17,7 @@ function init() {
 
     document.getElementById('wpcontent').appendChild(modal);
 
-    document.getElementsByClassName('ykfbxfapro-close-btn')[0].addEventListener('click', () => {
+    document.getElementsByClassName('yosbrxfapro-close-btn')[0].addEventListener('click', () => {
         document.getElementById('wpcontent').removeChild(modal);
     });
 
